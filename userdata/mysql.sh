@@ -7,7 +7,7 @@ sudo dnf install mariadb105-server -y
 sudo systemctl start mariadb
 sudo systemctl enable mariadb
 cd /tmp/
-git clone -b main https://github.com/vrao27/vprofile-project.git
+git clone -b awsliftandshift https://github.com/vrao27/vprofile-project.git
 #restore the dump file for the application
 sudo mysqladmin -u root password "$DATABASE_PASS"
 sudo mysql -u root -p"$DATABASE_PASS" -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$DATABASE_PASS'"
