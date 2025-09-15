@@ -21,5 +21,54 @@ sql dump file:
 - /src/main/resources/db_backup.sql
 - db_backup.sql file is a mysql dump file.we have to import this dump to mysql db server
 - > mysql -u <user_name> -p accounts < db_backup.sql
+  >
+  > uedbiue'dn
+  > noeo:wq
+  sjse
+  >
+  > ee
+
+hi hello 
+i am vamsi
+how ae uoy
+hi h
+gehb
+kdhdhd
+nhheh
+gghh
+xs
+
+aw
 
 
+hg
+
+w
+w
+e
+er55f
+ hd
+
+ e
+ d
+
+ kwindf]n
+ jdcnd
+hebddd
+
+
+
+diuh3i
+mdod
+mdowjo
+
+vamsi skswdniuw39hd
+jiud
+oiwjdnd
+niei
+hdbiden
+,dwwdd'ldd
+mml
+
+
+dd
