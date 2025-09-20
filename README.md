@@ -1,6 +1,6 @@
 # Prerequisites
-#
-- JDK 17 or 21
+#@dfd
+- JDK 25 or 26
 - Maven 3.9
 - MySQL 8
 
