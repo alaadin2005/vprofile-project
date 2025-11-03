@@ -126,7 +126,7 @@ User=www-data
 Group=www-data
 WorkingDirectory=/opt/flask-app
 Environment="PATH=/opt/flask-app/venv/bin"
-ExecStart=/opt/flask-app/venv/bin/python3 app.py
+ExecStart=/opt/flask-app/venv/bin/python3 /opt/flask-app/app.py
 Restart=always
 
 [Install]
