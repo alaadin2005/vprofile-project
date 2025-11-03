@@ -7,7 +7,7 @@ while true; do
     echo "High load for $duration sec (delay $delay)"
     end=$((SECONDS+duration))
     while [ $SECONDS -lt $end ]; do
-        curl -s http://172.31.28.163:8181/ > /dev/null &
+        curl -s http://MentionWebServerIPHere:80/ > /dev/null &
         sleep $delay
     done
 
@@ -17,7 +17,7 @@ while true; do
     echo "Low load for $duration sec (delay $delay)"
     end=$((SECONDS+duration))
     while [ $SECONDS -lt $end ]; do
-        curl -s http://172.31.28.163:8181/ > /dev/null &
+        curl -s http://MentionWebServerIPHere:80/ > /dev/null &
         sleep $delay
     done
 done

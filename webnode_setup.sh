@@ -3,10 +3,12 @@
 #  Node Setup Script for Monitoring Lecture Environment
 #-------------------------------------------------------------
 #  This script installs and configures:
-#   1. Node Exporter (for Prometheus)
-#   2. Apache2 with demo website
-#   3. Load generation scripts
-#   4. Promtail (for Loki log collection)
+#   1. Basic System Setup
+#   2. Node Exporter (for Prometheus)
+#   3. Flask App as a Service
+#   4. Load generation scripts
+#   5. Promtail (for Loki log collection)
+#   6. Final Summary
 #
 #  Author: HKH Admin
 #  Version: 2.0
@@ -185,7 +187,7 @@ positions:
   filename: /tmp/positions.yaml
 
 clients:
-  - url: http://172.31.26.231:3100/loki/api/v1/push
+  - url: http://lokiIPaddress:3100/loki/api/v1/push
 
 scrape_configs:
   - job_name: varlogs
@@ -221,6 +223,28 @@ systemctl status promtail --no-pager
 echo "✅ Promtail setup completed."
 
 #-------------------------------------------------------------
+# 7. Configure UFW Firewall
+#-------------------------------------------------------------
+echo "===== [7/6] Configuring UFW Firewall ====="
+
+# Install ufw if not present
+apt install -y ufw
+
+# Allow SSH (port 22), Node Exporter (9100), Loki (3100), and Flask app (80)
+echo "Allowing SSH (22), Node Exporter (9100), Loki (3100), and Flask app (80) through firewall..."
+ufw allow 22/tcp
+ufw allow 9100/tcp
+ufw allow 3100/tcp
+ufw allow 80/tcp
+
+# Enable UFW (force yes)
+echo "Enabling UFW..."
+echo "y" | ufw enable
+ufw status verbose
+
+echo "✅ UFW firewall configured."
+
+#-------------------------------------------------------------
 # 6. Final Summary
 #-------------------------------------------------------------
 echo "============================================================="
@@ -228,5 +252,5 @@ echo "🎉  Setup completed successfully!"
 echo "-------------------------------------------------------------"
 echo " Node Exporter  : Running on port 9100"
 echo " Apache Website : Available at http://$(hostname -I | awk '{print $1}')"
-echo " Promtail Logs  : Forwarding to Loki at 172.31.26.231:3100"
+echo " Promtail Logs  : Forwarding to Loki at lokiIPaddress:3100"
 echo "============================================================="
