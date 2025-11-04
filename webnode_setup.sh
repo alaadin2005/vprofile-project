@@ -5,7 +5,7 @@
 #  This script installs and configures:
 #   1. Basic System Setup
 #   2. Node Exporter (for Prometheus)
-#   3. Flask App as a Service
+#   3. Titan App as a Service
 #   4. Load generation scripts
 #   5. Promtail (for Loki log collection)
 #   6. Final Summary
@@ -86,9 +86,9 @@ systemctl status node --no-pager
 echo "✅ Node Exporter setup completed."
 
 #-------------------------------------------------------------
-# 3. Setup Flask App as a Service
+# 3. Setup Titan App as a Service
 #-------------------------------------------------------------
-echo "===== [3/6] Setting up Flask App as a Service ====="
+echo "===== [3/6] Setting up Titan App as a Service ====="
 
 # Update system and install Python3 and venv
 sudo apt update
@@ -102,11 +102,11 @@ git clone https://github.com/hkhcoder/vprofile-project.git
 cd vprofile-project/
 git checkout monitoring
 
-# Move flask-app to /opt and set up virtual environment
-mkdir -p /opt/flask-app
-echo "Moving Flask app files to /opt/flask-app..."
-mv flask-app/*  /opt/flask-app
-cd /opt/flask-app
+# Move titan to /opt and set up virtual environment
+mkdir -p /opt/titan
+echo "Moving Flask app files to /opt/titan..."
+mv flask-app/*  /opt/titan
+cd /opt/titan
 echo "Creating Python virtual environment..."
 python3 -m venv venv
 echo "Activating virtual environment and installing requirements..."
@@ -114,32 +114,37 @@ source venv/bin/activate
 pip install -r requirments.txt
 chmod +x app.py
 
+# Create log directory for Titan app and set permissions
+mkdir -p /var/log/titan
+chown www-data:www-data /var/log/titan
+chmod 755 /var/log/titan
+
 # Create systemd service for Flask app
 echo "Creating systemd service for Flask app..."
-cat <<EOF > /etc/systemd/system/flask-app.service
+cat <<EOF > /etc/systemd/system/titan.service
 [Unit]
-Description=Flask App Service
+Description=Titan App Service
 After=network.target
 
 [Service]
 User=www-data
 Group=www-data
-WorkingDirectory=/opt/flask-app
-Environment="PATH=/opt/flask-app/venv/bin"
-ExecStart=/opt/flask-app/venv/bin/python3 /opt/flask-app/app.py
+WorkingDirectory=/opt/titan
+Environment="PATH=/opt/titan/venv/bin"
+ExecStart=/opt/titan/venv/bin/python3 /opt/titan/app.py
 Restart=always
 
 [Install]
 WantedBy=multi-user.target
 EOF
 
-echo "Enabling and starting Flask app service..."
+echo "Enabling and starting Titan app service..."
 sudo systemctl daemon-reload
-sudo systemctl enable flask-app
-sudo systemctl start flask-app
-sudo systemctl status flask-app --no-pager
+sudo systemctl enable titan
+sudo systemctl start titan
+sudo systemctl status titan --no-pager
 
-echo "✅ Flask app setup and service started successfully."
+echo "✅ Titan app setup and service started successfully."
 
 #-------------------------------------------------------------
 # 4. Load Generation Scripts

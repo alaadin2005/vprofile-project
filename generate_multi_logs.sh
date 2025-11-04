@@ -5,7 +5,7 @@
 # into multiple log files under /var/log/apache2/
 # ---------------------------------------------------------------------
 
-LOG_DIR="/var/log/apache2"
+LOG_DIR="/var/log/titan"
 APPS=("app1" "app2" "app3")   # log files will be app1.log, app2.log, app3.log
 INTERVAL_MIN=1                 # minimum seconds between logs per app
 INTERVAL_MAX=3                 # maximum seconds between logs per app
