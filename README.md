@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Prerequisites
 #######
 - JDK 11 
@@ -23,3 +24,7 @@ sql dump file:
 - > mysql -u <user_name> -p accounts < db_backup.sql
 
 
+=======
+# CI/CD DevOps Project
+Includes Jenkins, Selenium, SonarQube and Jira integration.
+>>>>>>> d416274 (adding new proj repo)

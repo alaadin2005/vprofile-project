@@ -1,4 +1,5 @@
 pipeline {
+<<<<<<< HEAD
     
 	agent any
         
@@ -32,10 +33,33 @@ pipeline {
         }
 
 	stage('UNIT TEST'){
+=======
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/example/repo.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh 'mvn sonar:sonar'
+                }
+            }
+        }
+        stage('Selenium Tests') {
+>>>>>>> d416274 (adding new proj repo)
             steps {
                 sh 'mvn test'
             }
         }
+<<<<<<< HEAD
 
 	stage('INTEGRATION TEST'){
             steps {
@@ -120,3 +144,12 @@ pipeline {
 
 
 }
+=======
+        stage('Archive Artifact') {
+            steps {
+                archiveArtifacts artifacts: 'target/*.jar'
+            }
+        }
+    }
+}
+>>>>>>> d416274 (adding new proj repo)
