@@ -12,9 +12,7 @@ APP_NAME="vprofile"                    # Application name
 DOMAIN="<YourDomainName>"              # Your real domain for SSL
 SUBDOMAIN="vprogcp"                    # Final public URL: vprogcp.hkhinfotek.xyz
 
-MY_IP="0.0.0.0/0"                      # Auto-detect current public IP for bastion access
-SSH_KEY="<EnterYourSSHPublicKey>"      # Your SSH public key for bastion access
-DB_PASSWORD="GcpVproSqlAdmin9040"      # Cloud SQL root password
+
 
 
 # ────────────────────────────────
@@ -52,8 +50,9 @@ HTTPS_LB="vprofile-https-lb"
 PRIVATE_ZONE="vprofile-private"
 PRIVATE_DNS="vprofile.local"
 
-TAG_BASTION="bastion"
-TAG_APP="app"
+
+PSA_RANGE="google-psa-range"
+
 echo "Setting project..."
 gcloud config set project "$PROJECT_ID" --quiet
 
@@ -201,9 +200,8 @@ gcloud services vpc-peerings delete \
     --quiet 
 
 echo "Deleting PSA allocated range..."
-gcloud compute addresses delete google-psa-range \
-    --global \
-    --quiet
+gcloud compute addresses delete "$PSA_RANGE" --global --quiet
+
 
 
 # ============================================================
