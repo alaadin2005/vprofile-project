@@ -54,7 +54,7 @@ HTTP_LB="vprofile-http-lb"
 HTTPS_LB="vprofile-https-lb"
 
 PRIVATE_ZONE="vprofile-private"
-PRIVATE_DNS="vprofile.local"
+PRIVATE_DNS="vprofile.internal"
 
 TAG_BASTION="bastion"
 TAG_APP="app"
