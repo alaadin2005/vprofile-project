@@ -358,6 +358,17 @@ echo "Reserving global static IP for load balancer"
 gcloud compute addresses create "$LB_IP" --global --quiet
 
 # ────────────────────────────────────────────────────────────────
+# 30.1 Create final HTTP forwarding rules
+# ────────────────────────────────────────────────────────────────
+
+gcloud compute forwarding-rules create "$HTTP_LB" \
+    --global \
+    --target-http-proxy="$HTTP_PROXY" \
+    --ports=80 \
+    --address="$LB_IP" \
+    --quiet
+
+# ────────────────────────────────────────────────────────────────
 # 31. Create DNS authorization for Google-managed SSL certificate
 # ────────────────────────────────────────────────────────────────
 echo "Creating DNS authorization for SSL certificate"
