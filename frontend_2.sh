@@ -106,13 +106,6 @@ gcloud compute forwarding-rules create "$HTTPS_LB" \
     --address="$LB_IP" \
     --quiet
 
-gcloud compute forwarding-rules create "$HTTP_LB" \
-    --global \
-    --target-http-proxy="$HTTP_PROXY" \
-    --ports=80 \
-    --address="$LB_IP" \
-    --quiet
-
 # ────────────────────────────────────────────────────────────────
 # 36. Get final load balancer IP
 # ────────────────────────────────────────────────────────────────
