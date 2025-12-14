@@ -19,7 +19,7 @@ pipeline {
 		}
 	    stage('Fetch code') {
             steps {
-               git branch: 'atom', url: 'https://github.com/hkhcoder/vprofile-project.git'
+               git branch: 'cicd', url: 'https://github.com/jkabirqa/aheeva-project.git'
             }
 
 	    }
@@ -57,10 +57,10 @@ pipeline {
             steps {
               withSonarQubeEnv('sonarserver') {
                 sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=vprofile \
-                   -Dsonar.projectName=vprofile \
+                   -Dsonar.projectName=aheeva \
                    -Dsonar.projectVersion=1.0 \
                    -Dsonar.sources=src/ \
-                   -Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/ \
+                   -Dsonar.java.binaries=target/test-classes/com/aheeva/account/controllerTest/ \
                    -Dsonar.junit.reportsPath=target/surefire-reports/ \
                    -Dsonar.jacoco.reportsPath=target/jacoco.exec \
                    -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
@@ -84,12 +84,12 @@ pipeline {
                   nexusUrl: '172.31.25.14:8081',
                   groupId: 'QA',
                   version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
-                  repository: 'vprofile-repo',
+                  repository: 'aheeva-project',
                   credentialsId: 'nexuslogin',
                   artifacts: [
-                    [artifactId: 'vproapp',
+                    [artifactId: 'aheevaapp',
                      classifier: '',
-                     file: 'target/vprofile-v2.war',
+                     file: 'target/aheeva-v2.war',
                      type: 'war']
                   ]
                 )
